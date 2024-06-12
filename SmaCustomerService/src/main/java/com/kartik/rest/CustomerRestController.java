@@ -66,9 +66,47 @@ public class CustomerRestController {
 		return response;
 	}
 	
-	//4. fetch one customer by pancard
-	//5. fetch one customer by aadharId
-	//6. fetch one customer by mobile
+	 //4. fetch one customer by PAN card
+    @GetMapping("/find/pan/{panCard}")
+    public ResponseEntity<Customer> getOneCustomerByPanCard(@PathVariable String panCard) {
+        ResponseEntity<Customer> response = null;
+        try {
+            Customer cust = service.getOneCustomerByPanCard(panCard);
+            response = new ResponseEntity<>(cust, HttpStatus.OK);
+        } catch (CustomerNotFoundException cnfe) {
+            cnfe.printStackTrace();
+            throw cnfe;
+        }
+        return response;
+    }
+
+    //5. fetch one customer by  AadharID
+    @GetMapping("/find/aadhar/{aadharId}")
+    public ResponseEntity<Customer> getOneCustomerByAadharId(@PathVariable String aadharId) {
+        ResponseEntity<Customer> response = null;
+        try {
+            Customer cust = service.getOneCustomerByAadhar(aadharId);
+            response = new ResponseEntity<>(cust, HttpStatus.OK);
+        } catch (CustomerNotFoundException cnfe) {
+            cnfe.printStackTrace();
+            throw cnfe;
+        }
+        return response;
+    }
+
+    //6. fetch one customer by mobile number
+    @GetMapping("/find/mobile/{mobile}")
+    public ResponseEntity<Customer> getOneCustomerByMobile(@PathVariable String mobile) {
+        ResponseEntity<Customer> response = null;
+        try {
+            Customer cust = service.getOneCustomerByMobile(mobile);
+            response = new ResponseEntity<>(cust, HttpStatus.OK);
+        } catch (CustomerNotFoundException cnfe) {
+            cnfe.printStackTrace();
+            throw cnfe;
+        }
+        return response;
+    }
 	
 }
 
